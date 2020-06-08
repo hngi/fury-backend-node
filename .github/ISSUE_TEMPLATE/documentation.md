@@ -1,7 +1,7 @@
 ---
 name: Documentation
 about: Add new or edit existing documentation
-title: "[DOCS]"
+title: "[DOCS]:"
 labels: documentation
 assignees: ''
 
