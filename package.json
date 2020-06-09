@@ -4,7 +4,7 @@
   "description": "A microservice for managing employee records",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
