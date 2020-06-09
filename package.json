@@ -1,0 +1,24 @@
+{
+  "name": "employee-records-microservice",
+  "version": "1.0.0",
+  "description": "A microservice for managing employee records",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hngi/fury-backend-note.git"
+  },
+  "keywords": [
+    "HR",
+    "employee",
+    "records"
+  ],
+  "author": "Team-Fury HNGi7",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hngi/fury-backend-note/issues"
+  },
+  "homepage": "https://github.com/hngi/fury-backend-note#readme"
+}
