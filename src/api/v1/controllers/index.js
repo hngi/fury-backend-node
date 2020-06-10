@@ -1,1 +1,1 @@
-export default 'placeholder file';
+export default "placeholder file";
