@@ -1,20 +1,22 @@
-import Joi from 'joi';
 import CustomError from '../../utils/customError'
 
-const validationMiddleware = (schema) => {
+const validationMiddleware = (requestSchema) => {
     return (req, res, next) => {
-
-        const result = Joi.validate(req.body, schema)
-        const { error } = result;
-        const valid = error == null;
-        if (valid) {
-            next()
-        } else {
-            const { details } = error;
-            const message = details.map(i => i.message).join(',');
-            const err = new CustomError(401, message)
-            next(err)
-        }
+        const validations = ['headers', 'params', 'query', 'body']
+            .map(key => {
+                const schema = requestSchema[key];
+                const value = req[key];
+                const validate = () => schema ? schema.validate(value) : Promise.resolve({});
+                return validate().then(result => ({ [key]: result }));
+            });
+        return Promise.all(validations)
+            .then(() => {
+                next();
+            }).catch(validationError => {
+                const message = validationError.details.map(d => d.message).join('');
+                const err = new CustomError(400, message)
+                next(err)
+            });
     }
 }
 
