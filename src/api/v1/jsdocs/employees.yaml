@@ -1,0 +1,42 @@
+paths:
+  /employees/:
+    post:
+      summary: Creates a new employee
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: new employee
+        description: It enables a user to create a new employee
+        required: true
+        schema:
+          $ref: '#/definitions/newEmployee'
+
+definitions:
+  newEmployee:
+    type: object
+    required:
+    - employee
+    properties:
+      employee:
+        type: object
+        required:
+        - userId
+        - firstName
+        - lastName
+        - phoneNo
+        - email
+        - departmentId
+        - hireDate
+        - address
+        properties:
+          userId: string
+          firstName: string
+          lastName: string
+          phoneNo: string
+          email: string
+          departmentId: string
+          address: string
+          hireDate:
+            type: string
+            format: date

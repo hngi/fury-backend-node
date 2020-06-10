@@ -1,8 +1,8 @@
-const { Pool } = require('pg');
-const pgtools = require('pgtools');
-const debug = require('debug')('log');
-const fs = require('fs').promises;
-const path = require('path');
+const { Pool } = require("pg");
+const pgtools = require("pgtools");
+const debug = require("debug")("log");
+const fs = require("fs").promises;
+const path = require("path");
 
 // if DB exists
 const createDB = async (dbConfig) => {
@@ -11,13 +11,16 @@ const createDB = async (dbConfig) => {
     host: dbConfig.host,
     database: dbConfig.database,
     password: dbConfig.password,
-    port: dbConfig.port
+    port: dbConfig.port,
   });
 
   const migrateFn = async () => {
-    debug('Running migration ...');
-    const sql = await fs.readFile(path.join(__dirname, './sql/db-create.sql'), 'utf8');
-    debug('SQL migration file read successfully');
+    debug("Running migration ...");
+    const sql = await fs.readFile(
+      path.join(__dirname, "./sql/db-create.sql"),
+      "utf8"
+    );
+    debug("SQL migration file read successfully");
 
     // reconnect client first
     const migrationClient = await pool.connect();
@@ -31,49 +34,51 @@ const createDB = async (dbConfig) => {
 
     // do some seeding here maybe create an initial super-admin, admin and responder
 
-    debug('Migration run succesfully');
+    debug("Migration run succesfully");
     migrationClient.release();
 
     await pool.end();
 
-    return 'migratedDB';
+    return "migratedDB";
   };
 
-  debug('Checking for database ...');
+  debug("Checking for database ...");
 
   try {
     const client = await pool.connect();
-    debug('Database found!');
+    debug("Database found!");
 
     // check if migration has been run
     try {
-      debug('Checking for initial migration ....');
+      debug("Checking for initial migration ....");
 
-      const result = await client.query('select exists(select version from db_version where version >= 1) as migrated');
+      const result = await client.query(
+        "select exists(select version from db_version where version >= 1) as migrated"
+      );
 
       // Table exists check if it has any rows
       if (result.rows[0].migrated) {
-        debug('Database has already been migrated');
+        debug("Database has already been migrated");
         client.release();
         await pool.end();
 
-        return 'dbAlreadyMigrated';
+        return "dbAlreadyMigrated";
       }
       // migration table is empty
-      throw new Error('Error: DB exists but migration table is empty');
+      throw new Error("Error: DB exists but migration table is empty");
     } catch (error) {
       // release old connection
       client.release();
 
       if (error.message.includes('relation "db_version" does not exist')) {
-        debug('Migration has not run yet. Attempting to run ...');
+        debug("Migration has not run yet. Attempting to run ...");
         try {
           await migrateFn();
 
-          return 'dbMigrated';
+          return "dbMigrated";
         } catch (err) {
           debug(err.message);
-          debug('An error occured executing SQL file');
+          debug("An error occured executing SQL file");
 
           throw err; // rethrow error to catch out there
         }
@@ -85,9 +90,11 @@ const createDB = async (dbConfig) => {
   } catch (error) {
     debug(error.message);
 
-    if (error.message.includes(`database "${dbConfig.database}" does not exist`)) {
-      debug('Database not found!');
-      debug('Attempting to create DB ...');
+    if (
+      error.message.includes(`database "${dbConfig.database}" does not exist`)
+    ) {
+      debug("Database not found!");
+      debug("Attempting to create DB ...");
 
       try {
         await pgtools.createdb(
@@ -95,7 +102,7 @@ const createDB = async (dbConfig) => {
             user: dbConfig.user,
             host: dbConfig.host,
             password: dbConfig.password,
-            port: dbConfig.port
+            port: dbConfig.port,
           },
           dbConfig.database
         );
@@ -105,7 +112,7 @@ const createDB = async (dbConfig) => {
         // run migration
         await migrateFn();
 
-        return 'dbCreatedAndMigrated';
+        return "dbCreatedAndMigrated";
       } catch (err) {
         debug(err.message);
         throw err; // db creation failure
@@ -115,6 +122,5 @@ const createDB = async (dbConfig) => {
     throw error; // throw the error for the external handler
   }
 };
-
 
 export default createDB;
