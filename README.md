@@ -27,13 +27,15 @@ Step 6: Check out to the task branch | <code>git checkout -b <NAME_OF_THE_TASK><
 
 Step 7: Create .env and copy the content of sample.env | <code>cp sample.env .env </code>
 
-Step 8: Update the DB credentials | N/B Postgres DB
+Step 8: Create .env.test and copy the content of sample.env | <code>cp sample.env.test .env.test </code>
 
-Step 8: npm install
+Step 9: Update the DB credentials | N/B Postgres DB
 
-Step 9: npm run dev
+Step 10: npm install
 
-Step 10: npm run lint
+Step 10: npm run dev
+
+Step 11: npm run lint
 
 
 #### Creating a pull request
