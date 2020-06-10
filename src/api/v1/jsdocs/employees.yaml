@@ -36,8 +36,7 @@ definitions:
           phoneNo: string
           email: string
           departmentId: string
+          address: string
           hireDate:
             type: string
             format: date
-          address:
-            type: string
