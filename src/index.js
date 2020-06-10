@@ -1,11 +1,11 @@
-import app from './api';
-import createDB from './api/db/create-db';
+import app from "./api";
+import createDB from "./api/db/create-db";
 
-require('custom-env').env();
+require("custom-env").env();
 
-const config = require('config');
-const http = require('http');
-const debug = require('debug')('log');
+const config = require("config");
+const http = require("http");
+const debug = require("debug")("log");
 
 const startServer = () => {
   const server = http.createServer(app);
@@ -22,21 +22,22 @@ const startServer = () => {
     return false;
   };
 
-  const port = normalizePort(config.get('server.port'));
-  app.set('port', port);
+  const port = normalizePort(config.get("server.port"));
+  app.set("port", port);
 
   const errorHandler = (error) => {
-    if (error.syscall !== 'listen') {
+    if (error.syscall !== "listen") {
       throw error;
     }
     const address = server.address();
-    const bind = typeof address === 'string' ? `pipe ${address}` : `port: ${port}`;
+    const bind =
+      typeof address === "string" ? `pipe ${address}` : `port: ${port}`;
     switch (error.code) {
-      case 'EACCES':
+      case "EACCES":
         debug(`${bind} requires elevated privileges.`);
         process.exit(1);
         break;
-      case 'EADDRINUSE':
+      case "EADDRINUSE":
         debug(`${bind} is already in use.`);
         process.exit(1);
         break;
@@ -45,22 +46,23 @@ const startServer = () => {
     }
   };
 
-  server.on('error', errorHandler);
-  server.on('listening', () => {
+  server.on("error", errorHandler);
+  server.on("listening", () => {
     const address = server.address();
-    const bind = typeof address === 'string' ? `pipe ${address}` : `port ${port}`;
+    const bind =
+      typeof address === "string" ? `pipe ${address}` : `port ${port}`;
     debug(`Listening on ${bind}`);
   });
 
   server.listen(port);
 
-  process.on('SIGINT', () => {
-    debug('Bye bye!');
+  process.on("SIGINT", () => {
+    debug("Bye bye!");
     process.exit();
   }); // -- for nodemon headache
 };
 
-createDB(config.get('dbConfig'))
+createDB(config.get("dbConfig"))
   .then(() => {
     // debug(res);
     startServer();
