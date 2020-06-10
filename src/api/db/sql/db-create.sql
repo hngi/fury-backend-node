@@ -31,3 +31,15 @@ CREATE TABLE departments (
      manager_id BIGINT,
      user_id BIGINT UNIQUE
 );
+
+CREATE TABLE employees (
+       id BIGINT NOT NULL PRIMARY KEY,
+       first_name VARCHAR(255),
+       last_name VARCHAR(255),
+       phone_no VARCHAR(255),
+       email VARCHAR(255),
+       hire_date DATETIME,
+       department_id BIGINT REFERENCES departments(id),
+       address VARCHAR(255),
+       user_id BIGINT UNIQUE
+);
