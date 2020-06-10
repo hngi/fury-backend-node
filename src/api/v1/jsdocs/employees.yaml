@@ -36,19 +36,8 @@ definitions:
           phoneNo: string
           email: string
           departmentId: string
-          hireDate: integer
+          hireDate:
+            type: string
+            format: date
           address:
-            type: object
-            required:
-            - addressLine1
-            - suburb
-            - city
-            - postalCode
-            - country
-            properties:
-              addressLine1: string
-              addressLine2: string
-              suburb: string
-              city: string
-              postalCode: string
-              country: string
+            type: string
