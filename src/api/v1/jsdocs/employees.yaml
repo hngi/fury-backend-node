@@ -36,7 +36,9 @@ definitions:
           phoneNo: string
           email: string
           departmentId: string
-          hireDate: integer
+          hireDate:
+            type: string
+            format: date
           address:
             type: object
             required:
