@@ -24,3 +24,22 @@ ALTER TABLE ONLY public.DB_VERSION ALTER COLUMN ID SET DEFAULT nextval('public.D
 
 ALTER TABLE ONLY public.DB_VERSION
     ADD CONSTRAINT DB_VERSION_pkey PRIMARY KEY (ID);
+
+CREATE TABLE departments (
+     id BIGINT NOT NULL PRIMARY KEY,
+     name VARCHAR(255),
+     manager_id BIGINT,
+     user_id BIGINT UNIQUE
+);
+
+CREATE TABLE employees (
+    id BIGINT NOT NULL PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    phone_no VARCHAR(255),
+    email VARCHAR(255),
+    hire_date DATETIME,
+    department_id BIGINT REFERENCES departments(id),
+    address VARCHAR(255),
+    user_id BIGINT UNIQUE
+);
