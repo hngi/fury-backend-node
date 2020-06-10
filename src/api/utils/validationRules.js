@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { parseAsync } from '@babel/core';
 
 export const createEmployeeSchema = {
     body: Joi.object().keys({
@@ -12,4 +13,20 @@ export const createEmployeeSchema = {
         address: Joi.string().min(5).required()
     })
 }
+
+export const updateEmployeeSchema = {
+    body: Joi.object().keys({
+        firstName: Joi.string().min(2).max(100),
+        lastName: Joi.string().min(2).max(100),
+        email: Joi.string().email(),
+        hireDate: Joi.date(),
+        departmentId: Joi.number(),
+        phoneNo: Joi.string().regex(/^\d{3}-\d{3}-\d{4}$/),
+        address: Joi.string().min(5)
+    }),
+    params: Joi.object().keys({
+        employeeId: Joi.number().required()
+    })
+}
+
 
