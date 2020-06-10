@@ -54,5 +54,6 @@ Click on it, and type your message, click on create pull request.
 
 If you have any more questions, please check out this resource -> https://www.youtube.com/watch?v=HbSjyU2vf6Y
 
+ <img src="https://res.cloudinary.com/ambrose/image/upload/v1591785020/ER.png" width="400" title="Fury Database Schema">
 
 
