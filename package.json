@@ -4,7 +4,7 @@
   "description": "A microservice for managing employee records",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_EnV=test jest",
     "test:watch": "NODE_ENV=test jest --watch",
     "test:cover": "NODE_ENV=test jest --coverage",
     "test:ci": "NODE_ENV=test jest --coverage && cat ./coverage/lcov.info | coveralls",
