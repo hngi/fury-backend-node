@@ -22,7 +22,7 @@ describe('validation middleware', () => {
             .post('/employee')
             .send({
                 firstName: '',
-                lastName: 'Doe',
+                lastName: '',
                 email: 'test@test.com',
                 hireDate: Date(),
                 userId: 234,
@@ -30,7 +30,7 @@ describe('validation middleware', () => {
                 phoneNo: '070-682-4176',
                 address: 'aso rock, Abuja'
             })
-        expect(res.status).toBe(401);
+        expect(res.status).toBe(400);
         expect(res.body.status).toBe('error');
         expect(res.body.error).toBe('"firstName" is not allowed to be empty');
     })
@@ -39,7 +39,7 @@ describe('validation middleware', () => {
         const testApp = express();
         testApp.use(express.json());
 
-        testApp.post('/employee', validationMiddleware(employeeSchema), (req, res) => {
+        testApp.post('/employee', validationMiddleware(createEmployeeSchema), (req, res) => {
             return res.status(200).send({ success: true })
         })
         testApp.use((error, req, res, next) => {
