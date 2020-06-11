@@ -1,6 +1,24 @@
 paths:
-  # Endpoint to create a new employee
+  # Endpoint to get all employees and create a new employee
   /employees/:
+    # GET operation
+    get:
+      tags:
+      - employees
+
+      summary: Gets all employees
+
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/EmployeesResponse'
+        '400':
+          description: Invalid body supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+
+    # POST operation
     post:
       tags:
       - employees
@@ -10,7 +28,7 @@ paths:
       parameters:
       - in: body
         name: body
-        description: A JSON object containing employee information
+        description: A JSON object containing an employee
         required: true
         schema:
           $ref: '#/definitions/EmployeeIDResponse'
@@ -27,6 +45,32 @@ paths:
     
   # Endpoint to update and delete an employee
   /employees/{employeeId}:
+    # GET Operation
+    get:
+      tags:
+      - employees
+
+      summary: Gets an employee
+      
+      parameters:
+      - in: path
+        name: employeeId
+        description: String ID of the employee to update
+        required: true
+        schema:
+          type: string
+
+      responses:
+        '204':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/EmployeeResponse'
+        '400':
+          description: Invalid ID supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+    
+    # PUT operation
     put:
       tags:
       - employees
@@ -59,30 +103,7 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestResponse'
     
-    get:
-      tags:
-      - employees
-
-      summary: Gets an employee
-      
-      parameters:
-      - in: path
-        name: employeeId
-        description: String ID of the employee to update
-        required: true
-        schema:
-          type: string
-
-      responses:
-        '204':
-          description: Successful operation
-          schema:
-            $ref: '#/definitions/EmployeeResponse'
-        '400':
-          description: Invalid ID supplied
-          schema:
-            $ref: '#/definitions/BadRequestResponse'
-    
+    # DELETE operation
     delete:
       tags:
       - employees
@@ -187,34 +208,21 @@ definitions:
       status:
         type: string
       data:
-        type: object
-        required:
-        - userId
-        - firstName
-        - lastName
-        - phoneNo
-        - email
-        - departmentId
-        - hireDate
-        - address
-        properties:
-          userId:
-            type: string
-          firstName:
-            type: string
-          lastName:
-            type: string
-          phoneNo:
-            type: string
-          email:
-            type: string
-          departmentId:
-            type: string
-          address:
-            type: string
-          hireDate:
-            type: string
-            format: date
+        $ref: '#/definitions/Employee'
+
+  # EmployeesResponse model
+  EmployeesResponse:
+    type: object
+    required:
+    - status
+    - data
+    properties:
+      status:
+        type: string
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Employee'
 
   # OKResponse model
   OKResponse:
