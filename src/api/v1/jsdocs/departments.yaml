@@ -60,6 +60,31 @@ paths:
           schema:
             $ref: '#/definitions/BadRequestResponse'
 
+    # DELETE operation
+    delete:
+      tags:
+      - departments
+
+      summary: Deletes a department
+      
+      parameters:
+      - in: path
+        name: departmentId
+        description: String ID of the department to delete
+        required: true
+        schema:
+          type: string
+
+      responses:
+        '204':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/OKResponse'
+        '400':
+          description: Invalid ID supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+
 definitions:
   # Department schema
   Department:

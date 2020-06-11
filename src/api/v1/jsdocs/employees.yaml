@@ -112,7 +112,7 @@ paths:
       parameters:
       - in: path
         name: employeeId
-        description: String ID of the employee to update
+        description: String ID of the employee to delete
         required: true
         schema:
           type: string
