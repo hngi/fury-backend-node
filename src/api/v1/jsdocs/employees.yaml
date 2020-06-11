@@ -28,10 +28,10 @@ paths:
       parameters:
       - in: body
         name: body
-        description: A JSON object containing an employee
+        description: A JSON object containing the employee information
         required: true
         schema:
-          $ref: '#/definitions/EmployeeIDResponse'
+          $ref: '#/definitions/Employee'
 
       responses:
         '201':
@@ -76,14 +76,6 @@ paths:
       - employees
 
       summary: Updates an employee
-
-      requestBody:
-        description: A JSON object containing the employee information to update
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/definitions/EmployeeUpdate'
       
       parameters:
       - in: path
@@ -92,6 +84,13 @@ paths:
         required: true
         schema:
           type: string
+
+      - in: body
+        name: body
+        description: A JSON object containing the employee information to update
+        required: true
+        schema:
+          $ref: '#/definitions/EmployeeUpdate'
 
       responses:
         '200':
@@ -229,11 +228,11 @@ definitions:
     type: object
     required:
     - status
-    - successMessage
+    - data
     properties:
       status:
         type: string
-      successMessage:
+      data:
         type: string
 
   # BadRequestResponse model
@@ -241,9 +240,9 @@ definitions:
     type: object
     required:
     - status
-    - errorMessage
+    - data
     properties:
       status:
         type: string
-      errorMessage:
+      data:
         type: string
