@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
       if (error) {
         throw error;
       }
-      response
+      res
         .status(200)
         .json({ message: `User added with ID: ${results.insertId}` });
     });
