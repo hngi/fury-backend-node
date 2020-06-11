@@ -163,27 +163,22 @@ definitions:
   # EmployeeUpdate model
   EmployeeUpdate:
     type: object
-    required:
-    - employee
     properties:
-      employee:
-        type: object
-        properties:
-          firstName:
-            type: string
-          lastName:
-            type: string
-          phoneNo:
-            type: string
-          email:
-            type: string
-          departmentId:
-            type: string
-          address:
-            type: string
-          hireDate:
-            type: string
-            format: date
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phoneNo:
+        type: string
+      email:
+        type: string
+      departmentId:
+        type: string
+      address:
+        type: string
+      hireDate:
+        type: string
+        format: date
 
   # EmployeeIDResponse model
   EmployeeIDResponse:
