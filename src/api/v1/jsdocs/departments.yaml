@@ -1,0 +1,64 @@
+paths:
+  # Endpoint to create a new department
+  /departments/:
+    # POST operation
+    post:
+      tags:
+      - departments
+
+      summary: Create a new department
+
+      parameters:
+      - in: body
+        name: body
+        description: A JSON object containing the department information
+        required: true
+        schema:
+          $ref: '#/definitions/Department'  
+
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/DepartmentIDResponse'
+        '400':
+          description: Invalid body supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+
+definitions:
+  # Department schema
+  Department:
+    type: object
+    required:
+    - departmentName
+    - managerId
+    properties:
+      departmentName:
+        type: string
+      managerId:
+        type: string
+
+  # DepartmentIDResponse model
+  DepartmentIDResponse:
+    type: object
+    required:
+    - status
+    - data
+    properties:
+      status:
+        type: string
+      data:
+        type: string
+
+  # BadRequestResponse model
+  BadRequestResponse:
+    type: object
+    required:
+    - status
+    - data
+    properties:
+      status:
+        type: string
+      data:
+        type: string
