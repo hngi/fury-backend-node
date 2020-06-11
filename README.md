@@ -39,6 +39,8 @@ As soon as you get there, you are going to see a green ‘compare and create a p
 
 If you have any more questions, please check out this resource -> https://www.youtube.com/watch?v=HbSjyU2vf6Y
 
+## E-R Diagram
+
  <img src="https://res.cloudinary.com/ambrose/image/upload/v1591785020/ER.png" width="400" title="Fury Database Schema">
 
 
