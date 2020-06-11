@@ -1,24 +1,143 @@
 paths:
+  # Endpoint to create a new employee
   /employees/:
     post:
+      tags:
+      - employees
+
       summary: Creates a new employee
-      produces:
-      - application/json
+
       parameters:
       - in: body
-        name: new employee
-        description: It enables a user to create a new employee
+        name: body
+        description: A JSON object containing employee information
         required: true
         schema:
-          $ref: '#/definitions/newEmployee'
+          $ref: '#/definitions/EmployeeIDResponse'
+
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/EmployeeIDResponse'
+        '400':
+          description: Invalid body supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+    
+  # Endpoint to update an employee
+  /employees/{employeeId}:
+    put:
+      tags:
+      - employees
+
+      summary: Updates an employee
+
+      requestBody:
+        description: A JSON object containing the employee information to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/EmployeeUpdate'
+      
+      parameters:
+      - in: path
+        name: employeeId
+        description: String ID of the employee to update
+        required: true
+        schema:
+          type: string
+
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/EmployeeResponse'
+        '400':
+          description: Invalid ID supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
 
 definitions:
-  newEmployee:
+  # Employee schema
+  Employee:
+    type: object
+    required:
+    - userId
+    - firstName
+    - lastName
+    - phoneNo
+    - email
+    - departmentId
+    - hireDate
+    - address
+    properties:
+      userId:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phoneNo:
+        type: string
+      email:
+        type: string
+      departmentId:
+        type: string
+      address:
+        type: string
+      hireDate:
+        type: string
+        format: date
+
+  # EmployeeUpdate model
+  EmployeeUpdate:
     type: object
     required:
     - employee
     properties:
       employee:
+        type: object
+        properties:
+          firstName:
+            type: string
+          lastName:
+            type: string
+          phoneNo:
+            type: string
+          email:
+            type: string
+          departmentId:
+            type: string
+          address:
+            type: string
+          hireDate:
+            type: string
+            format: date
+
+  # EmployeeIDResponse model
+  EmployeeIDResponse:
+    type: object
+    required:
+    - status
+    - data
+    properties:
+      status:
+        type: string
+      data:
+        type: string
+
+  # EmployeeResponse model
+  EmployeeResponse:
+    type: object
+    required:
+    - status
+    - data
+    properties:
+      status:
+        type: string
+      data:
         type: object
         required:
         - userId
@@ -30,13 +149,32 @@ definitions:
         - hireDate
         - address
         properties:
-          userId: string
-          firstName: string
-          lastName: string
-          phoneNo: string
-          email: string
-          departmentId: string
-          address: string
+          userId:
+            type: string
+          firstName:
+            type: string
+          lastName:
+            type: string
+          phoneNo:
+            type: string
+          email:
+            type: string
+          departmentId:
+            type: string
+          address:
+            type: string
           hireDate:
             type: string
             format: date
+
+  # BadRequestResponse model
+  BadRequestResponse:
+    type: object
+    required:
+    - status
+    - errorMessage
+    properties:
+      status:
+        type: string
+      errorMessage:
+        type: string
