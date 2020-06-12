@@ -3,6 +3,6 @@ import employeesCtrl from "../../controllers/employeesController";
 
 const employeesRouter = express.Router();
 
-employeesRouter.post("/employees", employeesCtrl.createEmployee);
+employeesRouter.post("/", employeesCtrl.createEmployee);
 
 export default employeesRouter;

@@ -41,7 +41,7 @@ const employeesCtrl = {
 
       return handleResponse(res, 201, {
         status: "success",
-        data: employee.employee_id,
+        data: employee.user_id,
       });
     } catch (error) {
       console.log(`error creating employee: ${error.message}`);
