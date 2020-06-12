@@ -1,11 +1,12 @@
 import express from "express";
 import { swaggerSpec } from "../../utils/swaggerSpec";
 import responseHandler from "../../utils/responseHandler";
-import { createEmployeeSchema } from '../../utils/validationRules'
+import { createEmployeeSchema, createDepartmentSchema } from '../../utils/validationRules'
 
 import validationMiddleware from '../middleware/validationMiddleware';
 
 import { createEmployee } from '../controllers/employeeController';
+import { createDepartment } from '../controllers/departmentController';
 
 
 const router = express.Router();
@@ -22,5 +23,9 @@ router.get("/configuration", (req, res) => {
   });
 });
 
+// employees routes
 router.post('/employees', validationMiddleware(createEmployeeSchema), createEmployee)
+
+//department routes
+router.post('/departments', validationMiddleware(createDepartmentSchema), createDepartment)
 export default router;
