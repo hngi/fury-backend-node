@@ -26,20 +26,20 @@ ALTER TABLE ONLY public.DB_VERSION
     ADD CONSTRAINT DB_VERSION_pkey PRIMARY KEY (ID);
 
 CREATE TABLE departments (
-     id BIGINT NOT NULL PRIMARY KEY,
-     name VARCHAR(255),
+     id bigserial NOT NULL PRIMARY KEY,
+     name character varying,
      manager_id BIGINT,
-     user_id BIGINT UNIQUE
+     user_id BIGINT
 );
 
 CREATE TABLE employees (
-       id BIGINT NOT NULL PRIMARY KEY,
-       first_name VARCHAR(255),
-       last_name VARCHAR(255),
-       phone_no VARCHAR(255),
-       email VARCHAR(255),
-       hire_date DATETIME,
+       id bigserial NOT NULL PRIMARY KEY,
+       first_name character varying,
+       last_name character varying,
+       phone_no character varying,
+       email character varying,
+       hire_date DATE,
        department_id BIGINT REFERENCES departments(id),
-       address VARCHAR(255),
-       user_id BIGINT UNIQUE
+       address character varying,
+       user_id BIGINT
 );
