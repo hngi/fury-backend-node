@@ -28,6 +28,31 @@ paths:
 
   # Endpoint to update a department
   /departments/{departmentId}:
+    # GET Operation
+    get:
+      tags:
+      - departments
+
+      summary: Gets a department
+      
+      parameters:
+      - in: path
+        name: departmentId
+        description: String ID of the department to update
+        required: true
+        schema:
+          type: string
+
+      responses:
+        '204':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/DepartmentResponse'
+        '400':
+          description: Invalid ID supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+
     # PUT operation
     put:
       tags:
