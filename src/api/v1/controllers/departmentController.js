@@ -4,8 +4,7 @@ import CustomError from '../../utils/customError';
 
 export const createDepartment = async (req, res, next) => {
     try {
-        // const { userId } = req.user
-        let userId = 2
+        const { userId } = req.user
         const { departmentName, managerId } = req.body
         const body = [departmentName, managerId, userId]
         const sql = `
