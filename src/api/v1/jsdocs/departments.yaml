@@ -1,6 +1,23 @@
 paths:
-  # Endpoint to create a new department
+  # Endpoint to get all departments and create a new department
   /departments/:
+    # GET operation
+    get:
+      tags:
+      - departments
+
+      summary: Gets all departments
+
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/DepartmentsResponse'
+        '400':
+          description: Invalid body supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+
     # POST operation
     post:
       tags:
@@ -166,6 +183,20 @@ definitions:
         type: string
       data:
         $ref: '#/definitions/Department'
+  
+  # DepartmentsResponse model
+  DepartmentsResponse:
+    type: object
+    required:
+    - status
+    - data
+    properties:
+      status:
+        type: string
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Department'
 
   # BadRequestResponse model
   BadRequestResponse:
