@@ -5,7 +5,7 @@ import responseHandler from "../../utils/responseHandler";
 const router = express.Router();
 
 // route for documentation in json
-router.get("/documentation", (req, res) => {
+router.get("/", (req, res) => {
   res.status(200).json(swaggerSpec);
 });
 
