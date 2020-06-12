@@ -1,3 +1,4 @@
+require("custom-env").env();
 
 module.exports = {
   dbConfig: {
