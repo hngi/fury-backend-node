@@ -1,13 +1,13 @@
 # fury-backend-node
 
-###Requirements
+### Requirements
 <ul>
     <li>Node</li>
     <li>NPM</li>
     <li>Postgres</li>
 </ul>
 
-###TEAM FURY - INSTALLATION
+### TEAM FURY - INSTALLATION
 
 Step 1: Click on Fork at the top right corner
 
