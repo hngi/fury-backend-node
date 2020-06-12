@@ -1,6 +1,12 @@
 import express from "express";
 import { swaggerSpec } from "../../utils/swaggerSpec";
 import responseHandler from "../../utils/responseHandler";
+import { createEmployeeSchema } from '../../utils/validationRules'
+
+import validationMiddleware from '../middleware/validationMiddleware';
+
+import { createEmployee } from '../controllers/employeeController';
+
 
 const router = express.Router();
 
@@ -16,4 +22,5 @@ router.get("/configuration", (req, res) => {
   });
 });
 
+router.post('/employees', validationMiddleware(createEmployeeSchema), createEmployee)
 export default router;
