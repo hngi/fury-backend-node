@@ -1,8 +1,8 @@
 const express = require("express");
-const router = express.Router();
+const createEmployeeRouter = express.Router();
 const createDB = require("./../../db/create-db");
 
-router.post("/", async (req, res) => {
+createEmployeeRouter.post("/", async (req, res) => {
   var {
     firstName,
     lastName,
@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
       if (error) {
         throw error;
       }
-      response
+      res
         .status(200)
         .json({ message: `User added with ID: ${results.insertId}` });
     });
@@ -43,4 +43,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = createEmployeeRouter;
