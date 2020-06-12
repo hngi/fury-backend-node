@@ -22,8 +22,8 @@ A employee records microservice built using Node.
 2. Create .env.test and copy the content of sample.env | `cp sample.env.test .env.test`
 3. Update the DB credentials | N/B Postgres DB
 4. npm install
-5. npm run dev
-6. npm run lint
+5. npm run lint
+6. npm run dev
 
 ## Creating a pull request
 
