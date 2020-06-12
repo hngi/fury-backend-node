@@ -36,5 +36,14 @@ export const createDepartmentSchema = {
     })
 }
 
+export const updateDepartmentSchema = {
+ body: Joi.object().keys({
+  departmentName: Joi.string().min(2).max(100),
+  managerId: Joi.number(),
+ }),
+ params: Joi.object().keys({
+  departmentId: Joi.number().required(),
+ }),
+};
 
 
