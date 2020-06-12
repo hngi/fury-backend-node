@@ -3,7 +3,7 @@ import cors from "cors";
 import v1Router from "./v1/routes";
 import CustomError from "./utils/customError";
 import errorHandler from "./utils/errorhandler";
-import { swaggerSpec } from "./utils/swagger-spec";
+import { swaggerSpec } from "./utils/swaggerSpec";
 
 const swaggerUi = require("swagger-ui-express");
 

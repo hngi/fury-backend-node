@@ -1,5 +1,5 @@
 import express from "express";
-import { swaggerSpec } from "../../utils/swagger-spec";
+import { swaggerSpec } from "../../utils/swaggerSpec";
 
 const router = express.Router();
 
