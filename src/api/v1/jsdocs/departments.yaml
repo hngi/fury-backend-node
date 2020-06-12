@@ -1,0 +1,211 @@
+paths:
+  # Endpoint to get all departments and create a new department
+  /departments/:
+    # GET operation
+    get:
+      tags:
+      - departments
+
+      summary: Gets all departments
+
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/DepartmentsResponse'
+        '400':
+          description: Invalid body supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+
+    # POST operation
+    post:
+      tags:
+      - departments
+
+      summary: Create a new department
+
+      parameters:
+      - in: body
+        name: body
+        description: A JSON object containing the department information
+        required: true
+        schema:
+          $ref: '#/definitions/Department'  
+
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/DepartmentIDResponse'
+        '400':
+          description: Invalid body supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+
+  # Endpoint to update a department
+  /departments/{departmentId}:
+    # GET Operation
+    get:
+      tags:
+      - departments
+
+      summary: Gets a department
+      
+      parameters:
+      - in: path
+        name: departmentId
+        description: String ID of the department to update
+        required: true
+        schema:
+          type: string
+
+      responses:
+        '204':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/DepartmentResponse'
+        '400':
+          description: Invalid ID supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+
+    # PUT operation
+    put:
+      tags:
+      - departments
+
+      summary: Updates a department
+      
+      parameters:
+      - in: path
+        name: departmentId
+        description: String ID of the department to update
+        required: true
+        schema:
+          type: string
+
+      - in: body
+        name: body
+        description: A JSON object containing the department information to update
+        required: true
+        schema:
+          $ref: '#/definitions/DepartmentUpdate'
+
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/DepartmentResponse'
+        '400':
+          description: Invalid ID supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+
+    # DELETE operation
+    delete:
+      tags:
+      - departments
+
+      summary: Deletes a department
+      
+      parameters:
+      - in: path
+        name: departmentId
+        description: String ID of the department to delete
+        required: true
+        schema:
+          type: string
+
+      responses:
+        '204':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/OKResponse'
+        '400':
+          description: Invalid ID supplied
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+
+definitions:
+  # Department schema
+  Department:
+    type: object
+    required:
+    - departmentName
+    - managerId
+    properties:
+      departmentName:
+        type: string
+      managerId:
+        type: string
+
+  # DepartmentUpdate model
+  DepartmentUpdate:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phoneNo:
+        type: string
+      email:
+        type: string
+      departmentId:
+        type: string
+      address:
+        type: string
+      hireDate:
+        type: string
+        format: date
+
+  # DepartmentIDResponse model
+  DepartmentIDResponse:
+    type: object
+    required:
+    - status
+    - data
+    properties:
+      status:
+        type: string
+      data:
+        type: string
+
+  # DepartmentResponse model
+  DepartmentResponse:
+    type: object
+    required:
+    - status
+    - data
+    properties:
+      status:
+        type: string
+      data:
+        $ref: '#/definitions/Department'
+  
+  # DepartmentsResponse model
+  DepartmentsResponse:
+    type: object
+    required:
+    - status
+    - data
+    properties:
+      status:
+        type: string
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Department'
+
+  # BadRequestResponse model
+  BadRequestResponse:
+    type: object
+    required:
+    - status
+    - data
+    properties:
+      status:
+        type: string
+      data:
+        type: string

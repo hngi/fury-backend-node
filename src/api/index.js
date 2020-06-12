@@ -1,8 +1,11 @@
-import express from 'express';
-import cors from 'cors';
-import v1Router from './v1/routes';
-import CustomError from './utils/customError';
-import errorHandler from './utils/errorhandler';
+import express from "express";
+import cors from "cors";
+import v1Router from "./v1/routes";
+import CustomError from "./utils/customError";
+import errorHandler from "./utils/errorhandler";
+import { swaggerSpec } from "./utils/swaggerSpec";
+
+const swaggerUi = require("swagger-ui-express");
 
 // create express app
 const app = express();
@@ -14,17 +17,19 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// base uri response
-app.get('/', (req, res) => {
-  res.status(200).send('Fury!');
-});
-
 // router for api version 1
-app.use('/api/v1', v1Router);
+app.use("/v1", v1Router);
+
+// use swagger-Ui-express for your app documentation endpoint
+const swaggerRouter = express.Router();
+swaggerRouter.use("/", swaggerUi.serve);
+swaggerRouter.get("/", swaggerUi.setup(swaggerSpec));
+swaggerRouter.get("/v1", swaggerUi.setup(swaggerSpec));
+app.use(["/v1", "/"], swaggerRouter);
 
 // routes not found go here
-app.all('*', (req, res, next) => {
-  const error = new CustomError(404, 'Oops! Resource not found');
+app.all("*", (req, res, next) => {
+  const error = new CustomError(404, "Oops! Resource not found");
   next(error);
 });
 
