@@ -3,7 +3,7 @@ import cors from "cors";
 import v1Router from "./v1/routes";
 import CustomError from "./utils/customError";
 import errorHandler from "./utils/errorhandler";
-import { swaggerSpec } from "./swagger-spec";
+import { swaggerSpec } from "./utils/swagger-spec";
 
 const swaggerUi = require("swagger-ui-express");
 
@@ -18,15 +18,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // base uri response
-app.get("/", (req, res) => {
-  res.status(200).send("Fury!");
-});
-
-// use swagger-Ui-express for your app documentation endpoint
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// app.get("/", (req, res) => {
+//   res.status(200).send("Fury!");
+// });
 
 // router for api version 1
-app.use("/api/v1", v1Router);
+app.use("/v1", v1Router);
+
+// use swagger-Ui-express for your app documentation endpoint
+app.get("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // routes not found go here
 app.all("*", (req, res, next) => {
