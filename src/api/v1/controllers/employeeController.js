@@ -67,3 +67,27 @@ export const deleteEmployee = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getSingleEmployee = async (req, res, next) => {
+  try {
+    const { employeeId } = req.params;
+
+    const employee = await db.query(
+      `SELECT * FROM employees WHERE id=${employeeId}`
+    );
+    if (!employee[0]) {
+      const err = new CustomError(400, "employee does not exist");
+      return next(err);
+    }
+
+    return responseHandler(res, 200, {
+      data: employee[0].name,
+    });
+  } catch (error) {
+    const err = new CustomError(400, {
+      status: "error",
+      data: error.message,
+    });
+    next(err);
+  }
+};
