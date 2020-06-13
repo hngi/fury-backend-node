@@ -110,3 +110,47 @@ export const getAllEmployees = async (req, res, next) => {
     next(err);
   }
 };
+export const updateEmployee = async (req, res, next) => {
+  try {
+    const employeeId = req.params.employeeId;
+    const {
+      firstName,
+      lastName,
+      phoneNo,
+      email,
+      departmentId,
+      hireDate,
+      address,
+    } = req.body;
+    const body = [
+      firstName,
+      lastName,
+      phoneNo,
+      email,
+      departmentId,
+      hireDate,
+      address,
+    ];
+
+    const employee = await db.query(
+      `SELECT * FROM employees WHERE id=${employeeId}`
+    );
+    if (!employee[0]) {
+      const err = new CustomError(404, "employee does not exist");
+      return next(err);
+    }
+
+    const sql = `UPDATE employees SET firstName=$1, lastName=$2, phoneNo=$3 email=$4, departmentId=$5, hiredDate=$6, address=$7 WHERE id=${employeeId} RETURNING *`;
+    let rows = await db.query(sql, body);
+
+    return responseHandler(res, 200, {
+      data: `${rows[0].firstName} ${rows[0].lastName} updated successfully`,
+    });
+  } catch (error) {
+    const err = new CustomError(400, {
+      status: "error",
+      data: error.message,
+    });
+    next(err);
+  }
+};
