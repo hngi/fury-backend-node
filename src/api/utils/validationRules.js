@@ -32,14 +32,14 @@ export const updateEmployeeSchema = {
 
 export const createDepartmentSchema = {
   body: Joi.object().keys({
-    departmentName: Joi.string().min(2).max(100).required(),
+    departmentName: Joi.string().min(2).max(90).required(),
     managerId: Joi.number().required(),
   }),
 };
 
 export const updateDepartmentSchema = {
   body: Joi.object().keys({
-    departmentName: Joi.string().min(2).max(100).required(),
+    departmentName: Joi.string().min(2).max(90).required(),
     managerId: Joi.number().required(),
   }),
   params: Joi.object().keys({
