@@ -8,6 +8,8 @@ import validationMiddleware from '../middleware/validationMiddleware';
 import { createEmployee } from '../controllers/employeeController';
 import { createDepartment, updateDepartment, deleteDepartment, getSingleDepartment, getAllDepartments } from '../controllers/departmentController';
 
+import { createEmployee } from "../controllers/employeeController";
+import { createDepartment } from "../controllers/departmentController";
 
 const router = express.Router();
 
@@ -24,9 +26,12 @@ router.get("/configuration", (req, res) => {
 });
 
 // employees routes
-router.post('/employees', validationMiddleware(createEmployeeSchema), createEmployee)
+router.post(
+  "/employees",
+  validationMiddleware(createEmployeeSchema),
+  createEmployee
+);
 
-//department routes
 router.post('/departments', validationMiddleware(createDepartmentSchema), createDepartment)
 router.put('/departments/:departmentId', validationMiddleware(updateDepartmentSchema), updateDepartment)
 router.delete('/departments/:departmentId', deleteDepartment)
