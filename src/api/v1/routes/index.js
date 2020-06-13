@@ -12,6 +12,7 @@ import validationMiddleware from "../middleware/validationMiddleware";
 import {
   createEmployee,
   deleteEmployee,
+  getSingleEmployee,
 } from "../controllers/employeeController";
 import {
   createDepartment,
@@ -42,6 +43,7 @@ router.post(
   createEmployee
 );
 router.delete("/employees/:employeeId", deleteEmployee);
+router.get("/employees/:employeeId", getSingleEmployee);
 
 // departments routes
 router.post(
