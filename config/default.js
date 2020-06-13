@@ -1,11 +1,13 @@
 require("custom-env").env();
 
 // parse DATABASE_URL if set in environment
+let matchFound;
+let db_user, db_password, db_host, db_port, db_name;
 
 const db_url = process.env.DATABASE_URL;
-let db_user, db_password, db_host, db_port, db_name;
+
 const regex = /^(?:(?:[^:/?#\s]+):\/{2})([^@/?#\s]+):([^@/?#\s]+)@([^/?#\s]+):([^@/?#\s]+)(?:\/([^?#\s]*))?$/g;
-const matchFound = [...db_url.matchAll(regex)];
+if (db_url) matchFound = [...db_url.matchAll(regex)];
 
 if (matchFound) {
   [, db_user, db_password, db_host, db_port, db_name] = matchFound[0];
