@@ -1,15 +1,25 @@
 import express from "express";
 import { swaggerSpec } from "../../utils/swaggerSpec";
 import responseHandler from "../../utils/responseHandler";
-import { createEmployeeSchema, createDepartmentSchema, updateDepartmentSchema } from '../../utils/validationRules'
+import {
+  createEmployeeSchema,
+  createDepartmentSchema,
+  updateDepartmentSchema,
+} from "../../utils/validationRules";
 
-import validationMiddleware from '../middleware/validationMiddleware';
+import validationMiddleware from "../middleware/validationMiddleware";
 
-import { createEmployee } from '../controllers/employeeController';
-import { createDepartment, updateDepartment, deleteDepartment, getSingleDepartment, getAllDepartments } from '../controllers/departmentController';
-
-import { createEmployee } from "../controllers/employeeController";
-import { createDepartment } from "../controllers/departmentController";
+import {
+  createEmployee,
+  deleteEmployee,
+} from "../controllers/employeeController";
+import {
+  createDepartment,
+  updateDepartment,
+  deleteDepartment,
+  getSingleDepartment,
+  getAllDepartments,
+} from "../controllers/departmentController";
 
 const router = express.Router();
 
@@ -31,11 +41,21 @@ router.post(
   validationMiddleware(createEmployeeSchema),
   createEmployee
 );
+router.delete("/employees/:employeeId", deleteEmployee);
 
-router.post('/departments', validationMiddleware(createDepartmentSchema), createDepartment)
-router.put('/departments/:departmentId', validationMiddleware(updateDepartmentSchema), updateDepartment)
-router.delete('/departments/:departmentId', deleteDepartment)
-router.get('/departments/:departmentId', getSingleDepartment)
-router.get('/departments', getAllDepartments)
+// departments routes
+router.post(
+  "/departments",
+  validationMiddleware(createDepartmentSchema),
+  createDepartment
+);
+router.put(
+  "/departments/:departmentId",
+  validationMiddleware(updateDepartmentSchema),
+  updateDepartment
+);
+router.delete("/departments/:departmentId", deleteDepartment);
+router.get("/departments/:departmentId", getSingleDepartment);
+router.get("/departments", getAllDepartments);
 
 export default router;
