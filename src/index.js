@@ -1,7 +1,6 @@
 import app from "./api";
 import createDB from "./api/db/create-db";
 
-require("custom-env").env();
 
 const config = require("config");
 const http = require("http");
