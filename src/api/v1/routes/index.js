@@ -1,12 +1,12 @@
 import express from "express";
 import { swaggerSpec } from "../../utils/swaggerSpec";
 import responseHandler from "../../utils/responseHandler";
-import {
-  createEmployeeSchema,
-  createDepartmentSchema,
-} from "../../utils/validationRules";
+import { createEmployeeSchema, createDepartmentSchema, updateDepartmentSchema } from '../../utils/validationRules'
 
-import validationMiddleware from "../middleware/validationMiddleware";
+import validationMiddleware from '../middleware/validationMiddleware';
+
+import { createEmployee } from '../controllers/employeeController';
+import { createDepartment, updateDepartment, deleteDepartment, getSingleDepartment, getAllDepartments } from '../controllers/departmentController';
 
 import { createEmployee } from "../controllers/employeeController";
 import { createDepartment } from "../controllers/departmentController";
@@ -32,10 +32,10 @@ router.post(
   createEmployee
 );
 
-//department routes
-router.post(
-  "/departments",
-  validationMiddleware(createDepartmentSchema),
-  createDepartment
-);
+router.post('/departments', validationMiddleware(createDepartmentSchema), createDepartment)
+router.put('/departments/:departmentId', validationMiddleware(updateDepartmentSchema), updateDepartment)
+router.delete('/departments/:departmentId', deleteDepartment)
+router.get('/departments/:departmentId', getSingleDepartment)
+router.get('/departments', getAllDepartments)
+
 export default router;

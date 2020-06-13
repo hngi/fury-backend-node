@@ -4,9 +4,10 @@ import CustomError from '../../utils/customError';
 
 export const createEmployee = async (req, res, next) => {
     try {
+        const { userId } = req.user
         const { firstName, lastName, phoneNo
             , email, departmentId,
-            hireDate, address, userId } = req.body
+            hireDate, address } = req.body
         const body = [firstName, lastName, phoneNo, email, departmentId, hireDate, address, userId]
         const sql = `
             INSERT INTO employees (first_name, last_name,phone_no, email, department_id,hire_date,address,user_id)
