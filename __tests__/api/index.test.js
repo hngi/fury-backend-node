@@ -6,18 +6,18 @@ const config = require("config");
 const request = require("supertest");
 
 describe("The express server", () => {
-  describe("when request is made to /api/v1", () => {
-    it('should respond with status code 200 and "Employee records microservice is up and running!"', async () => {
-      const res = await request(app).get("/api/v1");
-      expect(res.status).toBe(200);
-      expect(res.text).toBe("Employee records microservice is up and running!");
+  describe("when request is made to /v1", () => {
+    it("should respond with status code 200 and renders Swagger API documentation correctly", async () => {
+      const res = await request(app).get("/v1");
+      expect(res.status).toBe(301);
+      expect(res.text).toMatchSnapshot();
     });
   });
   describe("when request is made to /", () => {
-    it('should respond with status code 200 and "Fury!"', async () => {
+    it("should respond with status code 200 and renders Swagger API documentation correctly", async () => {
       const res = await request(app).get("/");
       expect(res.status).toBe(200);
-      expect(res.text).toBe("Fury!");
+      expect(res.text).toMatchSnapshot();
     });
   });
   describe("when request is made to an invalid route", () => {
