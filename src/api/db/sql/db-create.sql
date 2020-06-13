@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS departments (
      user_id BIGINT
 );
 
-CREATE TABLE employees IF NOT EXISTS (
+CREATE TABLE IF NOT EXISTS employees  (
        id bigserial NOT NULL PRIMARY KEY,
        first_name character varying,
        last_name character varying,
@@ -40,9 +40,9 @@ CREATE TABLE employees IF NOT EXISTS (
        user_id BIGINT
 );
 
-CREATE TABLE migrations IF NOT EXISTS (
+CREATE TABLE IF NOT EXISTS migrations (
     id serial NOT NULL PRIMARY KEY,
     migration_filename character varying,
-    db_version smallint
+    db_version smallint,
     date_created TIMESTAMP
 )
