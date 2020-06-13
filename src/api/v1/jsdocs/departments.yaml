@@ -133,32 +133,24 @@ definitions:
     type: object
     required:
     - departmentName
-    - managerId
     properties:
       departmentName:
         type: string
+        minimum: 2
+        maximum: 100
       managerId:
-        type: string
+        type: integer
 
   # DepartmentUpdate model
   DepartmentUpdate:
     type: object
     properties:
-      firstName:
+      departmentName:
         type: string
-      lastName:
-        type: string
-      phoneNo:
-        type: string
-      email:
-        type: string
-      departmentId:
-        type: string
-      address:
-        type: string
-      hireDate:
-        type: string
-        format: date
+        minimum: 2
+        maximum: 100
+      managerId:
+        type: integer
 
   # DepartmentIDResponse model
   DepartmentIDResponse:
