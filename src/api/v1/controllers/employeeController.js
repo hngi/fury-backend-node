@@ -91,3 +91,22 @@ export const getSingleEmployee = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getAllEmployees = async (req, res, next) => {
+  try {
+    const employees = await db.query(`SELECT * FROM employees`);
+    if (employees.length < 1) {
+      const err = new CustomError(400, "no employees found");
+      return next(err);
+    }
+    return responseHandler(res, 200, {
+      data: employees,
+    });
+  } catch (error) {
+    const err = new CustomError(400, {
+      status: "error",
+      data: error.message,
+    });
+    next(err);
+  }
+};
