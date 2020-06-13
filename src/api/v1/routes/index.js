@@ -5,6 +5,7 @@ import {
   createEmployeeSchema,
   createDepartmentSchema,
   updateDepartmentSchema,
+  updateEmployeeSchema,
 } from "../../utils/validationRules";
 
 import validationMiddleware from "../middleware/validationMiddleware";
@@ -14,6 +15,7 @@ import {
   deleteEmployee,
   getSingleEmployee,
   getAllEmployees,
+  updateEmployee,
 } from "../controllers/employeeController";
 import {
   createDepartment,
@@ -43,6 +45,11 @@ router.post(
   validationMiddleware(createEmployeeSchema),
   createEmployee
 );
+router.put(
+  "/employees/:employeeId",
+  validationMiddleware(updateEmployeeSchema),
+  updateEmployee
+)
 router.delete("/employees/:employeeId", deleteEmployee);
 router.get("/employees/:employeeId", getSingleEmployee);
 router.get("/employees", getAllEmployees);
