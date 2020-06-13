@@ -13,9 +13,7 @@ export const createDepartment = async (req, res, next) => {
           `;
     let rows = await db.query(sql, body);
 
-    return responseHandler(res, 201, {
-      data: rows[0].id,
-    });
+    return responseHandler(res, 201, rows[0].id);
   } catch (error) {
     const err = new CustomError(400, {
       status: "error",
@@ -46,9 +44,7 @@ export const updateDepartment = async (req, res, next) => {
           `;
     let rows = await db.query(sql, body);
 
-    return responseHandler(res, 200, {
-      data: rows[0].name,
-    });
+    return responseHandler(res, 200, rows[0].name);
   } catch (error) {
     const err = new CustomError(400, {
       status: "error",
@@ -70,9 +66,11 @@ export const deleteDepartment = async (req, res, next) => {
       return next(err);
     }
     await db.query(`DELETE FROM departments WHERE id=${departmentId}`);
-    return responseHandler(res, 204, {
-      data: `${department[0].name} deleted successfully`,
-    });
+    return responseHandler(
+      res,
+      204,
+      `${department[0].name} deleted successfully`
+    );
   } catch (error) {
     console.log(error);
     const err = new CustomError(400, {
@@ -95,9 +93,7 @@ export const getSingleDepartment = async (req, res, next) => {
       return next(err);
     }
 
-    return responseHandler(res, 200, {
-      data: department[0].name,
-    });
+    return responseHandler(res, 200, department[0].name);
   } catch (error) {
     const err = new CustomError(400, {
       status: "error",
@@ -114,9 +110,7 @@ export const getAllDepartments = async (req, res, next) => {
       const err = new CustomError(400, "no department found");
       return next(err);
     }
-    return responseHandler(res, 200, {
-      data: department,
-    });
+    return responseHandler(res, 200, department);
   } catch (error) {
     const err = new CustomError(400, {
       status: "error",

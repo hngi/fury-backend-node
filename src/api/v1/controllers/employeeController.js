@@ -30,9 +30,7 @@ export const createEmployee = async (req, res, next) => {
           `;
     let rows = await db.query(sql, body);
 
-    return responseHandler(res, 201, {
-      data: rows[0].id,
-    });
+    return responseHandler(res, 201, rows[0].id);
   } catch (error) {
     const err = new CustomError(400, {
       status: "error",
@@ -54,9 +52,11 @@ export const deleteEmployee = async (req, res, next) => {
       return next(err);
     }
     await db.query(`DELETE FROM employee WHERE id=${employeeId}`);
-    return responseHandler(res, 204, {
-      data: `${employee[0].first_name} ${employee[0].last_name} deleted successfully`,
-    });
+    return responseHandler(
+      res,
+      204,
+      `${employee[0].first_name} ${employee[0].last_name} deleted successfully`
+    );
   } catch (error) {
     console.log(error);
     const err = new CustomError(400, {
@@ -79,9 +79,7 @@ export const getSingleEmployee = async (req, res, next) => {
       return next(err);
     }
 
-    return responseHandler(res, 200, {
-      data: employee[0].name,
-    });
+    return responseHandler(res, 200, employee[0].name);
   } catch (error) {
     const err = new CustomError(400, {
       status: "error",
@@ -98,9 +96,7 @@ export const getAllEmployees = async (req, res, next) => {
       const err = new CustomError(400, "no employees found");
       return next(err);
     }
-    return responseHandler(res, 200, {
-      data: employees,
-    });
+    return responseHandler(res, 200, employees);
   } catch (error) {
     const err = new CustomError(400, {
       status: "error",
