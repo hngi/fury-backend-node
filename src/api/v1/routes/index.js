@@ -13,6 +13,7 @@ import {
   createEmployee,
   deleteEmployee,
   getSingleEmployee,
+  getAllEmployees,
 } from "../controllers/employeeController";
 import {
   createDepartment,
@@ -44,6 +45,7 @@ router.post(
 );
 router.delete("/employees/:employeeId", deleteEmployee);
 router.get("/employees/:employeeId", getSingleEmployee);
+router.get("/employees", getAllEmployees);
 
 // departments routes
 router.post(
