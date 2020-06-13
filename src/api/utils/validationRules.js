@@ -46,3 +46,9 @@ export const updateDepartmentSchema = {
     departmentId: Joi.number().required(),
   }),
 };
+
+export const deleteEmployeeSchema = {
+  params: Joi.object().keys({
+    employeeId: Joi.number().required(),
+  }),
+};

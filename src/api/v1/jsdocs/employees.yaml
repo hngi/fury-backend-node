@@ -140,22 +140,27 @@ definitions:
     - email
     - departmentId
     - hireDate
-    - address
     properties:
       userId:
-        type: string
+        type: integer
       firstName:
         type: string
+        minimum: 2
+        maximum: 100
       lastName:
         type: string
+        minimum: 2
+        maximum: 100
       phoneNo:
         type: string
+        pattern: '^\d{3}-\d{3}-\d{4}$'
       email:
         type: string
       departmentId:
         type: string
       address:
         type: string
+        minimum: 5
       hireDate:
         type: string
         format: date
@@ -166,16 +171,22 @@ definitions:
     properties:
       firstName:
         type: string
+        minimum: 2
+        maximum: 100
       lastName:
         type: string
+        minimum: 2
+        maximum: 100
       phoneNo:
         type: string
+        pattern: '^\d{3}-\d{3}-\d{4}$'
       email:
         type: string
       departmentId:
         type: string
       address:
         type: string
+        minimum: 5
       hireDate:
         type: string
         format: date
