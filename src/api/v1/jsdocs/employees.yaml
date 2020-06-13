@@ -183,7 +183,7 @@ definitions:
       email:
         type: string
       departmentId:
-        type: string
+        type: integer
       address:
         type: string
         minimum: 5
