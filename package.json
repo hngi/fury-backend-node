@@ -36,7 +36,7 @@
     "cross-env": "^7.0.2",
     "custom-env": "^2.0.1",
     "debug": "^4.1.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-jwt": "^5.3.3",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
